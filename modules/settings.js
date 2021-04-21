@@ -310,7 +310,7 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.serendipityHint",
     scope: "world",
     config: true,
-    default: "none",
+    default: false,
     type: Boolean,
     onChange: () => {game.ageSystem.ageTracker.refresh()}
   });
@@ -327,6 +327,19 @@ export const registerSystemSettings = function() {
     type: Object, 
     onChange: () => {if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
   }); 
+
+  /**
+   * Age Tracker Position
+   */
+   game.settings.register("age-system", "ageTrackerPos", {
+    name: "SETTINGS.serendipityValue",
+    // hint: "SETTINGS.serendipityValueHint",
+    scope: "client",
+    config: false,
+    default: {isOriginal: true, xPos: 0, yPos: 0},
+    type: Object, 
+    onChange: () => {}
+  });
 
 };
 

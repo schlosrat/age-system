@@ -1267,11 +1267,11 @@
   border: none;
 }
 .age-system.sheet.spaceship p {
-  margin: 0;
   border-radius: 4px;
   height: 26px;
   padding-top: 5px;
   padding-bottom: 5px;
+  margin: 0;
 }
 .age-system.sheet.spaceship .inuse {
   cursor: pointer;
@@ -1314,6 +1314,10 @@
 }
 .age-system.sheet.spaceship .image-description .ship-desc {
   height: 190px;
+}
+.age-system.sheet.spaceship .image-description .ship-desc p {
+  margin: 7px 0;
+  height: auto;
 }
 .age-system.sheet.spaceship .image-description .ship-desc label.desc.desc {
   display: block;
@@ -1699,6 +1703,9 @@
 .colorset-modern-blue fieldset {
   border-color: #007DAD;
 }
+.colorset-modern-blue #age-tracker-drag:hover {
+  background-color: #007DAD;
+}
 .colorset-modern-blue .dice-show.trait-test i:last-of-type {
   color: #007DAD;
 }
@@ -1853,6 +1860,9 @@
 }
 .colorset-fantasy-blue fieldset {
   border-color: #0f4f5b;
+}
+.colorset-fantasy-blue #age-tracker-drag:hover {
+  background-color: #0f4f5b;
 }
 .colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
   color: #0f4f5b;
@@ -2009,6 +2019,9 @@
 .colorset-dragon-red fieldset {
   border-color: #810207;
 }
+.colorset-dragon-red #age-tracker-drag:hover {
+  background-color: #810207;
+}
 .colorset-dragon-red .dice-show.trait-test i:last-of-type {
   color: #810207;
 }
@@ -2163,6 +2176,9 @@
 }
 .colorset-folded-purple fieldset {
   border-color: #565183;
+}
+.colorset-folded-purple #age-tracker-drag:hover {
+  background-color: #565183;
 }
 .colorset-folded-purple .dice-show.trait-test i:last-of-type {
   color: #565183;
@@ -2319,6 +2335,9 @@
 .colorset-ronin-green fieldset {
   border-color: #155f0e;
 }
+.colorset-ronin-green #age-tracker-drag:hover {
+  background-color: #155f0e;
+}
 .colorset-ronin-green .dice-show.trait-test i:last-of-type {
   color: #155f0e;
 }
@@ -2473,6 +2492,9 @@
 }
 .colorset-select-one fieldset {
   border-color: #273249;
+}
+.colorset-select-one #age-tracker-drag:hover {
+  background-color: #273249;
 }
 .colorset-select-one .dice-show.trait-test i:last-of-type {
   color: #273249;
@@ -2629,6 +2651,9 @@
 .colorset-the-grey fieldset {
   border-color: #3d3e3f;
 }
+.colorset-the-grey #age-tracker-drag:hover {
+  background-color: #3d3e3f;
+}
 .colorset-the-grey .dice-show.trait-test i:last-of-type {
   color: #3d3e3f;
 }
@@ -2783,6 +2808,9 @@
 }
 .colorset-red-warrior fieldset {
   border-color: #600000;
+}
+.colorset-red-warrior #age-tracker-drag:hover {
+  background-color: #600000;
 }
 .colorset-red-warrior .dice-show.trait-test i:last-of-type {
   color: #600000;
@@ -2939,6 +2967,9 @@
 .colorset-never-dead fieldset {
   border-color: #663322;
 }
+.colorset-never-dead #age-tracker-drag:hover {
+  background-color: #663322;
+}
 .colorset-never-dead .dice-show.trait-test i:last-of-type {
   color: #663322;
 }
@@ -3069,8 +3100,16 @@
   z-index: 99;
   opacity: 0.6;
 }
+#age-tracker-drag {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+}
+#age-tracker-drag:hover {
+  cursor: move;
+}
 #age-tracker {
-  position: fixed;
+  position: absolute;
   bottom: 69px;
   left: 260px;
   width: 800px;
@@ -3083,6 +3122,7 @@
 }
 #age-tracker a {
   padding-top: 4px;
+  text-shadow: none;
 }
 #age-tracker div.age-serendipity {
   max-width: max-content;
