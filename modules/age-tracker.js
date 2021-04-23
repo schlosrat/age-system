@@ -46,7 +46,7 @@ export class AgeTracker extends Application {
 
 			data.compData = compData;
 		}
-
+		// game.setting.set("age-system", "ageTrackerPos", game.user.getFlag("age-system", "ageTrackerPos"));
 		return data;
 	}
 	
@@ -54,10 +54,17 @@ export class AgeTracker extends Application {
 		super.activateListeners(html);
 		html.find(".ser-mod").click(this._onClickSer.bind(this));
 		html.find(".comp-mod").click(this._onClickComp.bind(this));
-		html.find(".milestone").click(this._onRollComp.bind(this));
+		html.find(".milestone").click(this._onRollComp.bind(this));		
+		html.find("#age-tracker-drag").contextmenu(this._onRightClick.bind(this));
+
+		// Set position
+		let tracker = document.getElementById("age-tracker");
+		const trackerPos = game.user.getFlag("age-system", "ageTrackerPos");
+		tracker.style.left = trackerPos.xPos;
+		tracker.style.bottom = trackerPos.yPos;
 
 		// Make the DIV element draggable:
-		this._dragElement(document.getElementById("age-tracker"));
+		this._dragElement(tracker);
 	}
 	
 	refresh() {
@@ -76,6 +83,14 @@ export class AgeTracker extends Application {
 		if (serData.actual > serData.max) serData.actual = serData.max;
 		if (serData.actual < 0) serData.actual = 0;
 		game.settings.set("age-system", "serendipityValue", serData);
+	}
+
+	_onRightClick(event) {
+		const tracker = event.currentTarget.closest("#age-tracker");
+		const original = CONFIG.ageSystem.ageTrackerPos;
+		tracker.style.left = original.xPos;
+		tracker.style.bottom = original.yPos;
+		game.user.setFlag("age-system", "ageTrackerPos", original);
 	}
 
 	_onClickComp(event) {
@@ -130,14 +145,20 @@ export class AgeTracker extends Application {
 		  pos3 = e.clientX;
 		  pos4 = e.clientY;
 		  // set the element's new position:
-		  elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+		//   elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+		  elmnt.style.bottom = (elmnt.offsetParent.clientHeight - elmnt.offsetTop - elmnt.clientHeight + pos2) + "px";
 		  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 		}
 	  
 		function closeDragElement() {
-		  // stop moving when mouse button is released:
-		  document.onmouseup = null;
-		  document.onmousemove = null;
+		  	// stop moving when mouse button is released:
+		  	document.onmouseup = null;
+		  	document.onmousemove = null;
+		  	// Save position on appropriate User Flag
+			const trackerPos = {};
+			trackerPos.xPos = elmnt.style.left;
+			trackerPos.yPos = elmnt.style.bottom;
+			game.user.setFlag("age-system", "ageTrackerPos", trackerPos);
 		}
 	}
 }
